@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import Home from "./components/Home/Home";
+import Exohouses from "./components/Exohouses/Exohouses";
+import EditExohouse from "./components/ExohouseForm/EditExohouse";
+import NewExohouse from "./components/ExohouseForm/NewExohouse";
+import Planets from "./components/Planet/Planet";
+import NewPlanet from "./components/PlanetForm/NewPlanet";
+import EditPlanet from "./components/PlanetForm/EditPlanet";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="Exohouses" element={<Exohouses />}>
+            <Route path="edit/:id" element={<EditExohouse />} /> 
+            <Route path="new" element={<NewExohouse/>} />
+          </Route>
+          <Route path="Planets" element={<Planets/>} />
+          <Route path="Planets/new" element={<NewPlanet/>}/>
+          <Route path="Planets/edit/:id" element={<EditPlanet/>}/>
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
